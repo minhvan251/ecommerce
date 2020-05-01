@@ -1,7 +1,8 @@
 import React from 'react';
 import './menu-item.styles.scss'
 import {withRouter} from 'react-router-dom'
-const MenuItem = ({size, title, imageUrl, history, linkUrl, match}) => (
+const MenuItem = ({size, title, imageUrl,
+                   history, linkUrl, match }) => (
 
     <div 
         onClick={() => 
