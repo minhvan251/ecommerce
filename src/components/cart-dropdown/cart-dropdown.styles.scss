@@ -15,11 +15,13 @@
       height: 240px;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      overflow: scroll;
     }
   
     button {
+      
       margin-top: auto;
     }
+    
   }
   
