@@ -5,7 +5,7 @@ import CheckOutItem from '../../components/checkout-item/checkout-item.component
 import {selectCartItems} from '../../redux/cart/cart.selector'
 import {selectCartTotal} from '../../redux/cart/cart.selector'
 import './checkout.styles.scss'
-
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button.component'
 const checkout = ({cartItems,cartTotal}) => (
     <div className='checkout-page'>
         <div className='checkout-header'>
@@ -31,7 +31,7 @@ const checkout = ({cartItems,cartTotal}) => (
             )
         )}
         <div className ='total'>TOTAL: ${cartTotal}</div>
-        
+        <StripeCheckoutButton price={cartTotal} />
     </div>
 )
 
