@@ -6,10 +6,12 @@ import ShopPage from './shop/shop.component'
 import Header from './components/header/header.component'
 import SignInAndSignOutPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 import CheckOut from './pages/checkout/checkout.component'
-import { auth, createUserProfileDocument } from './firebase/firebase.utils'
+import { convertCollectionsSnapshotToMap, firestore, auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils'
 import {connect} from 'react-redux'
 import {setCurrentUser} from './redux/user/user.action'
-
+import {selectCollectionsForPreview} from './redux/shop/shop.selector'
+import {selectCurrentUser} from './redux/user/user.selector'
+import {createStructuredSelector} from 'reselect'
 class App extends React.Component  {
 
   
@@ -18,11 +20,15 @@ class App extends React.Component  {
 
   componentDidMount(){
     const {setCurrentUser} = this.props
+    
+    
+
     this.unsubscribFromAuth = auth.onAuthStateChanged(async userAuth => {
       if(userAuth){
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
+          
           setCurrentUser({
             
               id:snapShot.id,
@@ -73,8 +79,12 @@ class App extends React.Component  {
   
 }
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser
+
+
+
+const mapStateToProps = createStructuredSelector({
+  currentUser : selectCurrentUser,
+ 
 })
 
 const mapDispatchToProps = dispatch => ({
